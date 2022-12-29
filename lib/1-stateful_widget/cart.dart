@@ -3,10 +3,17 @@ import 'package:apple_store/common/product_tile.dart';
 import 'package:flutter/material.dart';
 
 class Cart extends StatelessWidget {
-  const Cart({super.key});
+  const Cart({
+    super.key,
+    required this.cartProductList,
+    required this.onPressed,
+  });
 
   /// 카트에 담긴 상품 목록
-  final List<Product> cartProductList = const [];
+  final List<Product> cartProductList;
+
+  /// 클릭 이벤트
+  final void Function(Product product) onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +36,7 @@ class Cart extends StatelessWidget {
                 return ProductTile(
                   product: product,
                   isInCart: true,
-                  onPressed: (product) {},
+                  onPressed: onPressed,
                 );
               },
             ),
