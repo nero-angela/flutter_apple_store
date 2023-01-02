@@ -25,3 +25,10 @@ class InheritedCart extends InheritedWidget {
     return context.dependOnInheritedWidgetOfExactType<InheritedCart>()!;
   }
 }
+
+extension BuildContextExt on BuildContext {
+  /// context.read<InheritedCart>()로 손쉽게 접근
+  T read<T extends InheritedWidget>() {
+    return dependOnInheritedWidgetOfExactType<T>()!;
+  }
+}

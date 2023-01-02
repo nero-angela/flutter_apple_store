@@ -10,7 +10,8 @@ class Cart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    InheritedCart inheritedCart = InheritedCart.of(context);
+    // InheritedCart inheritedCart = InheritedCart.of(context);
+    InheritedCart inheritedCart = context.read();
     final List<Product> cartProductList = inheritedCart.cartProductList;
 
     return Scaffold(
