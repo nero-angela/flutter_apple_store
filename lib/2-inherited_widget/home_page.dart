@@ -23,9 +23,13 @@ class _HomePageState extends State<HomePage> {
   void onProductPressed(Product product) {
     setState(() {
       if (cartProductList.contains(product)) {
-        cartProductList.remove(product);
+        // cartProductList.remove(product);
+        cartProductList = cartProductList.where((element) {
+          return element != product;
+        }).toList();
       } else {
-        cartProductList.add(product);
+        // cartProductList.add(product);
+        cartProductList = [...cartProductList, product];
       }
     });
   }
