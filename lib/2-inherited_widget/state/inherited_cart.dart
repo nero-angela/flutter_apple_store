@@ -19,4 +19,9 @@ class InheritedCart extends InheritedWidget {
   bool updateShouldNotify(InheritedCart oldWidget) {
     return true;
   }
+
+  /// InheritedCart.of(context)로 손쉽게 접근
+  static InheritedCart of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<InheritedCart>()!;
+  }
 }
