@@ -32,6 +32,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final inheritedCart = context.read<InheritedCart>();
     return InheritedCart(
       cartProductList: cartProductList,
       onProductPressed: onProductPressed,
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> {
         ),
         bottomNavigationBar: BottomBar(
           currentIndex: currentIndex,
-          cartTotal: "0",
+          cartTotal: "${inheritedCart.cartProductList.length}",
           onTap: (index) => setState(() {
             currentIndex = index;
           }),
