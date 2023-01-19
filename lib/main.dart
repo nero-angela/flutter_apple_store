@@ -1,4 +1,4 @@
-import 'package:apple_store/2-inherited_widget/home_page.dart';
+import 'package:apple_store/3-provider/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
