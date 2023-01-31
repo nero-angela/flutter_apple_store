@@ -8,9 +8,13 @@ class ProviderCart with ChangeNotifier {
   /// 상품 클릭
   void onProductPressed(Product product) {
     if (cartProductList.contains(product)) {
-      cartProductList.remove(product);
+      // cartProductList.remove(product);
+      cartProductList = cartProductList.where((cartProduct) {
+        return cartProduct != product;
+      }).toList();
     } else {
-      cartProductList.add(product);
+      // cartProductList.add(product);
+      cartProductList = [...cartProductList, product];
     }
     notifyListeners();
   }
