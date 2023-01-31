@@ -1,4 +1,5 @@
 import 'package:apple_store/3-provider/cart.dart';
+import 'package:apple_store/3-provider/state/provider_badge.dart';
 import 'package:apple_store/3-provider/state/provider_cart.dart';
 import 'package:apple_store/3-provider/store.dart';
 import 'package:apple_store/common/bottom_bar.dart';
@@ -22,6 +23,11 @@ class _HomePageState extends State<HomePage> {
       providers: [
         ChangeNotifierProvider(
           create: (context) => ProviderCart(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ProviderBadge(
+            providerCart: context.read(),
+          ),
         )
       ],
       child: Scaffold(
@@ -35,12 +41,15 @@ class _HomePageState extends State<HomePage> {
             Cart(),
           ],
         ),
-        bottomNavigationBar: BottomBar(
-          currentIndex: currentIndex,
-          cartTotal: "0",
-          onTap: (index) => setState(() {
-            currentIndex = index;
-          }),
+        bottomNavigationBar: Selector<ProviderBadge, int>(
+          selector: (context, providerBadge) => providerBadge.counter,
+          builder: (context, counter, child) => BottomBar(
+            currentIndex: currentIndex,
+            cartTotal: "$counter",
+            onTap: (index) => setState(() {
+              currentIndex = index;
+            }),
+          ),
         ),
       ),
     );
