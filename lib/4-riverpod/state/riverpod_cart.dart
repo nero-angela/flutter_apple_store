@@ -14,9 +14,11 @@ class RiverpodCart extends Notifier<List<Product>> {
   /// 상품 클릭
   void onProductPressed(Product product) {
     if (state.contains(product)) {
-      state.remove(product);
+      // state.remove(product);
+      state = state.where((element) => element != product).toList();
     } else {
-      state.add(product);
+      // state.add(product);
+      state = [...state, product];
     }
   }
 }
