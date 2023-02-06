@@ -1,4 +1,5 @@
 import 'package:apple_store/5-cubit/cart.dart';
+import 'package:apple_store/5-cubit/state/badge_cubit.dart';
 import 'package:apple_store/5-cubit/state/cart_cubit.dart';
 import 'package:apple_store/5-cubit/store.dart';
 import 'package:apple_store/common/bottom_bar.dart';
@@ -23,6 +24,9 @@ class _HomePageState extends State<HomePage> {
         BlocProvider(
           create: (context) => CartCubit(),
         ),
+        BlocProvider(
+          create: (context) => BadgeCubit(cartCubit: context.read()),
+        ),
       ],
       child: Scaffold(
         body: IndexedStack(
@@ -35,12 +39,14 @@ class _HomePageState extends State<HomePage> {
             Cart(),
           ],
         ),
-        bottomNavigationBar: BottomBar(
-          currentIndex: currentIndex,
-          cartTotal: "0",
-          onTap: (index) => setState(() {
-            currentIndex = index;
-          }),
+        bottomNavigationBar: BlocBuilder<BadgeCubit, int>(
+          builder: (context, state) => BottomBar(
+            currentIndex: currentIndex,
+            cartTotal: "$state",
+            onTap: (index) => setState(() {
+              currentIndex = index;
+            }),
+          ),
         ),
       ),
     );
