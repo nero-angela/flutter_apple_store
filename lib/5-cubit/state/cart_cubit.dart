@@ -7,11 +7,13 @@ class CartCubit extends Cubit<List<Product>> {
   /// 상품 클릭
   void onProductPressed(Product product) {
     if (state.contains(product)) {
-      state.remove(product);
-      emit(state);
+      // state.remove(product);
+      // emit(state);
+      emit(state.where((element) => element != product).toList());
     } else {
-      state.add(product);
-      emit(state);
+      // state.add(product);
+      // emit(state);
+      emit([...state, product]);
     }
   }
 }
