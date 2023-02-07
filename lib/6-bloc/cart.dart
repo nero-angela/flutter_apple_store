@@ -1,6 +1,8 @@
+import 'package:apple_store/6-bloc/state/cart_bloc.dart';
 import 'package:apple_store/common/product.dart';
 import 'package:apple_store/common/product_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Cart extends StatelessWidget {
   const Cart({
@@ -9,7 +11,7 @@ class Cart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Product> cartProductList = [];
+    final List<Product> cartProductList = context.watch<CartBloc>().state;
 
     return Scaffold(
       body: cartProductList.isEmpty
@@ -30,7 +32,9 @@ class Cart extends StatelessWidget {
                 return ProductTile(
                   product: product,
                   isInCart: true,
-                  onPressed: (product) {},
+                  onPressed: (product) {
+                    context.read<CartBloc>().add(OnProductPressed(product));
+                  },
                 );
               },
             ),
